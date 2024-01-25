@@ -21,7 +21,7 @@ features = [
     "usb-logging",
 ]
 
-# Don't optimize build dependencies, like proc macros.
-# Helps with build times.
-[profile.release.build-override]
-opt-level = 0
+# Optimize binary size and conduct link-time optimization
+[profile.release]
+opt-level = "s"
+lto = "thin"

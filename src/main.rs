@@ -45,7 +45,7 @@ fn main() -> ! {
         // This resource is for the UART we're creating.
         lpuart2,
         ..
-    } = board::t40(instances);
+    } = board::t41(instances);
 
     // When this returns, you can use the `log` crate to write text
     // over USB. Use either `screen` (macOS, Linux) or PuTTY (Windows)
