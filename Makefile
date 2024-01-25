@@ -12,7 +12,7 @@ all: hex
 
 # Compile `tamproxy.hex`
 hex:
-	cargo objcopy --release -- -O ihex $(HEXFILE)
+	cargo objcopy -- -O ihex $(HEXFILE)
 	size $(HEXFILE)
 
 upload: hex

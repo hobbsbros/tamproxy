@@ -22,6 +22,6 @@ features = [
 ]
 
 # Optimize binary size and conduct link-time optimization
-[profile.release]
+[profile.dev]
 opt-level = "s"
 lto = "thin"
