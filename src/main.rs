@@ -8,15 +8,27 @@
 #![no_std]
 #![no_main]
 
-mod board;
+mod teensy41;
 
 use teensy4_bsp as bsp;
 use teensy4_panic as _;
 
-use board::Teensy;
+use teensy41::Teensy41;
+
+/// Milliseconds to delay before toggling the LED
+/// and writing text outputs.
+const DELAY_MS: u32 = 100;
 
 #[bsp::rt::entry]
 fn main() -> ! {
     // Create a new Teensy.
-    let mut teensy = Teensy::new();
+    let (mut teensy, mut pins) = Teensy41::new();
+
+    let p13 = teensy.digital_output(pins.p13);
+
+    loop {
+        teensy.delay(DELAY_MS);
+        teensy.log("Hello, world!");
+        p13.toggle();   
+    }
 }
