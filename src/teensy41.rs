@@ -17,7 +17,10 @@ use bsp::{
             Input,
         },
     },
-    pins::t41::Pins,
+    pins::{
+        common::P13,
+        t41::Pins,
+    },
 };
 
 /// The intended GPT1 frequency (Hz).
@@ -31,12 +34,12 @@ const GPT1_DIVIDER: u32 = board::PERCLK_FREQUENCY / GPT1_FREQUENCY;
 /// Create an abstraction over the Teensy 4.1 board.
 pub struct Teensy41 {
     delay: Blocking<Gpt<1>, 1000>,
-    gpio: Port<2>,
+    pub led: Output<P13>,
 }
 
 impl Teensy41 {
     /// Construct a new Teensy board.
-    pub fn new() -> (Self, Pins) {
+    pub fn new() -> Self {
         // These are peripheral instances. Let the board configure these for us.
         // This function can only be called once!
         let instances = board::instances();
@@ -54,7 +57,7 @@ impl Teensy41 {
             usb,
             // This is the GPIO2 port. We need this to configure the LED as a
             // GPIO output.
-            gpio2,
+            mut gpio2,
             ..
         } = board::t41(instances);
 
@@ -72,10 +75,10 @@ impl Teensy41 {
         // Convenience for blocking delays.
         let delay = Blocking::<_, GPT1_FREQUENCY>::from_gpt(gpt1);
 
-        (Self {
+        Self {
             delay,
-            gpio: gpio2,
-        }, pins)
+            led: gpio2.output(pins.p13),
+        }
     }
 
     /// Delay for a provided number of milliseconds.
@@ -86,15 +89,5 @@ impl Teensy41 {
     /// Log the provided information via USB.
     pub fn log(&mut self, info: &str) {
         log::info!("{}", info);
-    }
-
-    /// Creates a digital output pin.
-    pub fn digital_output<P: Pin<2>>(&mut self, pin: P) -> Output<P> {
-        self.gpio.output(pin)
-    }
-
-    /// Creates a digital input pin.
-    pub fn digital_input<P: Pin<2>>(&mut self, pin: P) -> Input<P> {
-        self.gpio.input(pin)
     }
 }

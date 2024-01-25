@@ -22,13 +22,12 @@ const DELAY_MS: u32 = 100;
 #[bsp::rt::entry]
 fn main() -> ! {
     // Create a new Teensy.
-    let (mut teensy, pins) = Teensy41::new();
-
-    let p13 = teensy.digital_output(pins.p13);
+    let mut teensy = Teensy41::new();
 
     loop {
         teensy.delay(DELAY_MS);
         teensy.log("Hello, world!");
-        p13.toggle();
+        
+        teensy.led.toggle();
     }
 }
