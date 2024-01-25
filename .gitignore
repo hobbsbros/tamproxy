@@ -1,0 +1,8 @@
+# Ignore build files
+/target
+**/*.rs.bk
+/out
+*.hex
+
+# Ignore Teensy Loader CLI
+teensy_loader_cli
