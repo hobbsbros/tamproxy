@@ -14,6 +14,7 @@ use bsp::{
         gpio::{
             Port,
             Output,
+            Input,
         },
     },
     pins::t41::Pins,
@@ -90,5 +91,10 @@ impl Teensy41 {
     /// Creates a digital output pin.
     pub fn digital_output<P: Pin<2>>(&mut self, pin: P) -> Output<P> {
         self.gpio.output(pin)
+    }
+
+    /// Creates a digital input pin.
+    pub fn digital_input<P: Pin<2>>(&mut self, pin: P) -> Input<P> {
+        self.gpio.input(pin)
     }
 }

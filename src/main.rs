@@ -29,6 +29,6 @@ fn main() -> ! {
     loop {
         teensy.delay(DELAY_MS);
         teensy.log("Hello, world!");
-        p13.toggle();   
+        p13.toggle();
     }
 }
