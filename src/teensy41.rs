@@ -16,10 +16,7 @@ use bsp::{
             Output,
         },
     },
-    pins::{
-        common::P13,
-        t41::Pins,
-    },
+    pins::t41::Pins,
 };
 
 /// The intended GPT1 frequency (Hz).
@@ -56,7 +53,7 @@ impl Teensy41 {
             usb,
             // This is the GPIO2 port. We need this to configure the LED as a
             // GPIO output.
-            mut gpio2,
+            gpio2,
             ..
         } = board::t41(instances);
 

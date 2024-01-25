@@ -22,7 +22,7 @@ const DELAY_MS: u32 = 100;
 #[bsp::rt::entry]
 fn main() -> ! {
     // Create a new Teensy.
-    let (mut teensy, mut pins) = Teensy41::new();
+    let (mut teensy, pins) = Teensy41::new();
 
     let p13 = teensy.digital_output(pins.p13);
 
