@@ -340,6 +340,7 @@ dependencies = [
  "cortex-m",
  "embedded-hal",
  "log",
+ "nb 1.1.0",
  "teensy4-bsp",
  "teensy4-panic",
 ]
