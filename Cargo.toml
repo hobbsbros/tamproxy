@@ -1,8 +1,10 @@
 [package]
 name = "tamproxy"
+description = "Totally Another Microcontroller Proxy."
 version = "0.1.0"
 authors = ["Joseph Hobbs <josephrosshobbs@gmail.com>"]
 edition = "2021"
+license = "MIT"
 
 [dependencies]
 cortex-m = "0.7"
