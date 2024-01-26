@@ -7,24 +7,18 @@ use teensy4_bsp as bsp;
 use bsp::{
     board,
     hal::{
-        // iomuxc::gpio::Pin,
         timer::Blocking,
         gpt::{
             ClockSource,
             Gpt,
         },
-        gpio::{
-            Port,
-            Output,
-            // Input,
-        },
+        gpio::Port,
     },
-    pins::t41::*,
-};
-
-use embedded_hal::serial::{
-    Read,
-    Write,
+    ral::{
+        Instance,
+        lpuart::RegisterBlock,
+    },
+    pins::t41::Pins,
 };
 
 /// The intended GPT1 frequency (Hz).
@@ -37,15 +31,14 @@ const GPT1_DIVIDER: u32 = board::PERCLK_FREQUENCY / GPT1_FREQUENCY;
 
 /// Create an abstraction over the Teensy 4.1 board.
 pub struct Teensy41 {
-    delay: Blocking<Gpt<1>, 1000>,
+    pub delay: Blocking<Gpt<1>, 1000>,
     pub gpio2: Port<2>,
-    lpuart2: board::Lpuart2,
-    pub led: Output<P13>,
+    pub lpuart2: Instance<RegisterBlock, 2>,
 }
 
 impl Teensy41 {
     /// Construct a new Teensy board.
-    pub fn new() -> Self {
+    pub fn new() -> (Self, Pins) {
         // These are peripheral instances. Let the board configure these for us.
         // This function can only be called once!
         let instances = board::instances();
@@ -63,7 +56,7 @@ impl Teensy41 {
             usb,
             // This is the GPIO2 port. We need this to configure the LED as a
             // GPIO output.
-            mut gpio2,
+            gpio2,
             // UART peripheral
             lpuart2,
             ..
@@ -83,15 +76,11 @@ impl Teensy41 {
         // Convenience for blocking delays.
         let delay = Blocking::<_, GPT1_FREQUENCY>::from_gpt(gpt1);
 
-        // Construct UART peripheral
-        let lpuart2 = board::lpuart(lpuart2, pins.p14, pins.p15, 115200);
-
-        Self {
+        (Self {
             delay,
-            led: gpio2.output(pins.p13),
             gpio2,
             lpuart2,
-        }
+        }, pins)
     }
 
     /// Delay for a provided number of milliseconds.
@@ -103,15 +92,4 @@ impl Teensy41 {
     pub fn log(&mut self, info: &str) {
         log::info!("{}", info);
     }
-
-    /// Reads a single byte from the UART serial bus.
-    pub fn read(&mut self) -> u8 {
-        nb::block!(self.lpuart2.read()).unwrap()
-    }
-
-    /// Writes a single byte to the UART serial bus.
-    pub fn write(&mut self, byte: u8) {
-        nb::block!(self.lpuart2.write(byte)).unwrap()
-    }
 }
-

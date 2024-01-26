@@ -1,22 +1,30 @@
-//! The starter code slowly blinks the LED, sets up
-//! USB logging, and creates a UART driver using pins
-//! 14 and 15. The UART baud rate is [`UART_BAUD`].
-//!
-//! Despite targeting the Teensy 4.0, this starter code
-//! also works on the Teensy 4.1.
+//! Main executable for TAMProxy.
 
 #![no_std]
 #![no_main]
 
+#![allow(unused_imports)]
+
+// Initialize macros
+mod delay;
+mod io;
+mod uart;
+mod usb;
 mod teensy41;
 
+// Import board support package
 use teensy4_bsp as bsp;
+
+// Import board utilities for macro expansions
+use bsp::board;
+
+// Import panic handler
 use teensy4_panic as _;
 
+// Import Teensy 4.1 struct.
 use teensy41::Teensy41;
 
-/// Milliseconds to delay before toggling the LED
-/// and writing text outputs.
+/// Milliseconds to delay before toggling the LED.
 const DELAY_MS: u32 = 100;
 
 #[bsp::rt::entry]
@@ -24,9 +32,12 @@ fn main() -> ! {
     // Create a new Teensy
     let mut teensy = Teensy41::new();
 
+    let led = digital_output!(teensy, p13);
+
     loop {
-        teensy.delay(DELAY_MS);
-        teensy.log("Hello, world!");
-        teensy.led.toggle();
+        delay!(teensy, DELAY_MS);
+        log!("Hello, world!");
+
+        led.toggle();
     }
 }
