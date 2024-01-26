@@ -11,6 +11,7 @@ macro_rules! main {
         let mut teensy = $teensy;
 
         // BEGIN CODE HERE
+        
         // SETUP
 
         // Create an on-board LED
