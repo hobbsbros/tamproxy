@@ -7,10 +7,7 @@
 /// This macro will be executed.
 macro_rules! main {
     () => {
-        // Create a new Teensy
-        let mut teensy = Teensy41::new();
-
-        // Create an LED
+        // Create an on-board LED
         let led = digital_output!(teensy, p13);
 
         loop {

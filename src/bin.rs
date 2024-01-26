@@ -40,6 +40,9 @@ const DELAY_MS: u32 = 100;
 
 #[bsp::rt::entry]
 fn main() -> ! {
+    // Create a new Teensy
+    let mut teensy = Teensy41::new();
+
     main!();
 }
 
