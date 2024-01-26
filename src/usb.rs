@@ -1,4 +1,4 @@
-//! Define the USB logging macro for TAMProxy.
+//! Define the USB logging macro.
 
 #[macro_export]
 /// Logs the provided information via USB.

@@ -1,18 +1,20 @@
-# TAMProxy Makefile
+# Makefile
 
 TEENSY = TEENSY41
 
 VERSION = 0.1.0
 
-HEXFILE = tamproxy-$(VERSION).hex
+PROJECTNAME = $(notdir $(CURDIR))
 
-# Silence make
+HEXFILE = $(PROJECTNAME)-$(VERSION).hex
+
+# Silence make output
 .SILENT:
 
-# Alias for `hex`
+# Alias for `make hex`
 all: hex
 
-# Compile `tamproxy.hex`
+# Compile HEX file
 hex:
 	cargo objcopy -- -O ihex $(HEXFILE)
 	size $(HEXFILE)

@@ -1,4 +1,4 @@
-//! Define digital I/O macros for TAMProxy.
+//! Define digital I/O macros.
 
 #[macro_export]
 /// Construct a digital output pin.

@@ -1,4 +1,4 @@
-//! Main executable for TAMProxy.
+//! Main executable.
 
 #![no_std]
 #![no_main]

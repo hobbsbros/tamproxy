@@ -1,4 +1,4 @@
-//! TAMProxy Build Script.
+//! Build Script.
 //!
 //! This build script compiles the Teensy Loader CLI
 

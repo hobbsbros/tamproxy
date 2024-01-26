@@ -1,4 +1,4 @@
-//! Defines TAMProxy read/write codes.
+//! Defines read/write codes.
 
 #[repr(u8)]
 pub enum Code {

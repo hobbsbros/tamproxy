@@ -1,4 +1,4 @@
-//! Define UART macros for TAMProxy.
+//! Define UART macros .
 
 #[macro_export]
 /// Construct the LPUART peripheral.

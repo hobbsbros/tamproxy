@@ -1,5 +1,5 @@
 //! Define the `Device` trait to abstract over devices with
-//! which TAMProxy can communicate.
+//! which the Teensy can communicate.
 
 use crate::Packet;
 

@@ -1,4 +1,4 @@
-//! Define a TAMProxy data packet.
+//! Define a data packet.
 
 const MAX_PACKET_LENGTH: usize = 8;
 
