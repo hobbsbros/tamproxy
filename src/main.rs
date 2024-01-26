@@ -12,6 +12,15 @@ mod uart;
 mod usb;
 mod teensy41;
 
+// Initialize device communication functions
+mod code;
+mod device;
+mod packet;
+
+// Export code & packet
+pub use code::Code;
+pub use packet::Packet;
+
 // Import board support package
 use teensy4_bsp as bsp;
 
