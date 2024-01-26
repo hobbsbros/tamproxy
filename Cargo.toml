@@ -14,6 +14,10 @@ log = "0.4"
 teensy4-panic = "0.2"
 nb = "1.1.0"
 
+[[bin]]
+name = "tamproxy"
+path = "src/bin.rs"
+
 [dependencies.teensy4-bsp]
 version = "0.4"
 features = [
