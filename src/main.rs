@@ -6,9 +6,17 @@
 #[macro_export]
 /// This macro will be executed.
 macro_rules! main {
-    () => {
+    ($teensy:ident) => {
+        // Create Teensy as a local variable
+        let mut teensy = $teensy;
+
+        // BEGIN CODE HERE
+        // SETUP
+
         // Create an on-board LED
         let led = digital_output!(teensy, p13);
+
+        // LOOP
 
         loop {
             log!("Hello, world!");
