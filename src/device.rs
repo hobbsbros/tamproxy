@@ -6,4 +6,7 @@ use crate::Packet;
 pub trait Device {
     /// Initialize this device.
     fn new() -> Packet;
+
+    /// Perform a request, returning a data packet.
+    fn request(packet: Packet) -> Packet;
 }
