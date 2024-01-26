@@ -26,8 +26,6 @@ $ make
 
 ## Thanks
 
-TAMProxy has been under continuous development for several years.
-
 ### `teensy4-rs`
 
 Thanks to Ian McIntyre (GitHub user `mciantyre`) for developing [`teensy4-rs`](https://github.com/mciantyre/teensy4-rs), a collection of Rust `no_std` crates to enable Rust development on the Teensy 4.0 and Teensy 4.1.  This collection of crates includes:
