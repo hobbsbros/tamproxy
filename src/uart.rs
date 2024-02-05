@@ -19,11 +19,7 @@ macro_rules! read {
 #[macro_export]
 /// Write a single byte to the UART serial bus.
 macro_rules! write {
-    ($uart:ident, $msg:ident) => {
-        nb::block!($uart.write($msg)).unwrap()
-    };
-
-    ($uart:ident, $msg:literal) => {
+    ($uart:ident, $msg:expr) => {
         nb::block!($uart.write($msg)).unwrap()
     };
 }
