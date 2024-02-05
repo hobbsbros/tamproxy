@@ -21,8 +21,15 @@ macro_rules! main {
 
         loop {
             log!("Hello, world!");
-            led.toggle();
-            delay!(teensy, DELAY_MS);
+            blink!(teensy, led);
         }
+    };
+}
+
+#[macro_export]
+macro_rules! blink {
+    ($teensy:ident, $led:ident) => {
+        $led.toggle();
+        delay!($teensy, 100);
     };
 }

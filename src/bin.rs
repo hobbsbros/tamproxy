@@ -35,9 +35,6 @@ use teensy4_panic as _;
 // Import Teensy 4.1 struct.
 use teensy41::Teensy41;
 
-/// Milliseconds to delay before toggling the LED.
-const DELAY_MS: u32 = 100;
-
 #[bsp::rt::entry]
 fn main() -> ! {
     // Create a new Teensy
